@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: Lambda Authorizer - To Be Destroyed
+
+Resources:
+  lambdaAuthorizer:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: auth.lambda_handler
+      Runtime: python3.6
+      FunctionName: lambda-authorizer
+      CodeUri: s3://serverless-meetup-enkel/lambda-authorizer2.zip
+      Description: ""
+      MemorySize: 1024
+      Timeout: 10
+      Role: !GetAtt Role.Arn
+
+
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaAuthorizerRole
+      Path: "/"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        -
+          Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+
+Outputs:
+  LambdaAuthorizerARN:
+    Description: Lambda Authorizer.
+    Value:
+      Fn::GetAtt:
+        - lambdaAuthorizer
+        - Arn
+    Export:
+      Name:
+        Fn::Sub: lambda-authorizer
