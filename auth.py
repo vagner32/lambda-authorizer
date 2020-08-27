@@ -4,7 +4,7 @@ import os
 def lambda_handler(event, context):
 
 
-    parameterName = os.environment['PARAMETER_NAME']
+    parameterName = os.environ['PARAMETER_NAME']
     c = boto3.client('ssm')
     r = c.get_parameter(Name=parameterName)
     statament = r['Parameter']['Value']

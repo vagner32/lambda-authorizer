@@ -48,7 +48,7 @@ Resources:
     Properties:
       Name: !Ref ParameterStoreEntryName
       Type: String
-      Value: 0
+      Value: false
 
 Outputs:
   LambdaAuthorizerARN:
