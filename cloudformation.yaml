@@ -2,6 +2,12 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
 Description: Lambda Authorizer - To Be Destroyed
 
+
+Parameters:
+  ParameterStoreEntryName:
+    Type: String
+    Default: "YouShallNotPass"
+
 Resources:
   lambdaAuthorizer:
     Type: "AWS::Serverless::Function"
@@ -16,7 +22,7 @@ Resources:
       Role: !GetAtt Role.Arn
       Environment:
         Variables:
-          PARAMETER_NAME: YouShallNotPass
+          PARAMETER_NAME: !Ref ParameterStoreEntryName
 
 
   Role:
@@ -40,7 +46,7 @@ Resources:
   Parameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: YouShallNotPass
+      Name: !Ref ParameterStoreEntryName
       Type: String
       Value: 0
 
