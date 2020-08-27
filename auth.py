@@ -25,8 +25,8 @@ def lambda_handler(event, context):
         },
             "context": {
             "header-message": "Keep out!",
-            "body-message": "Morre, diabo.",
-            "log-message": "Perdeu."
+            "bodyMessage": "Morre, diabo.",
+            "logMessage": "Perdeu."
         }
     }
 
