@@ -43,12 +43,36 @@ Resources:
           Action: sts:AssumeRole
 
 
+  ApiGatewayInvokeLambdaPermission2:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaAPIServiceRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Sid: ''
+          Effect: Allow
+          Principal:
+            Service: apigateway.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+      - PolicyName: API_Service_Role_Policy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Action: lambda:InvokeFunction
+            Resource:
+              - "*"
+            Effect: Allow
+
+
+
   Parameter:
     Type: AWS::SSM::Parameter
     Properties:
       Name: !Ref ParameterStoreEntryName
       Type: String
-      Value: true
+      Value: false
 
 Outputs:
   LambdaAuthorizerARN:
@@ -60,3 +84,11 @@ Outputs:
     Export:
       Name:
         Fn::Sub: lambda-authorizer
+  IAMRoleARN:
+    Value:
+      Fn::GetAtt:
+        - ApiGatewayInvokeLambdaPermission2
+        - Arn
+    Export:
+      Name:
+        LambdaAPIServiceRole
