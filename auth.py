@@ -24,7 +24,9 @@ def lambda_handler(event, context):
                     ]
         },
             "context": {
-            "message": "Keep out!"
+            "header-message": "Keep out!",
+            "body-message": "Morre, diabo.",
+            "log-message": "Perdeu."
         }
     }
 
@@ -41,6 +43,6 @@ def lambda_handler(event, context):
                     ]
     },
     "context": {
-    "message": "Welcome!"
+    "log-message": "Welcome!"
      }
     }
