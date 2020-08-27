@@ -1,9 +1,12 @@
 import boto3
+import os
 
 def lambda_handler(event, context):
 
+
+    parameterName = os.environment['PARAMETER_NAME']
     c = boto3.client('ssm')
-    r = c.get_parameter(Name='YouShallNotPass')
+    r = c.get_parameter(Name=parameterName)
     statament = r['Parameter']['Value']
 
 
@@ -21,7 +24,7 @@ def lambda_handler(event, context):
                     ]
         },
             "context": {
-            "message": "Keep Out!"
+            "message": "Keep out!"
         }
     }
 

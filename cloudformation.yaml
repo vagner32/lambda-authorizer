@@ -14,6 +14,9 @@ Resources:
       MemorySize: 1024
       Timeout: 10
       Role: !GetAtt Role.Arn
+      Environment:
+        Variables:
+          PARAMETER_NAME: YouShallNotPass
 
 
   Role:
@@ -32,6 +35,14 @@ Resources:
           Principal:
             Service: lambda.amazonaws.com
           Action: sts:AssumeRole
+
+
+  Parameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: YouShallNotPass
+      Type: String
+      Value: 0
 
 Outputs:
   LambdaAuthorizerARN:
