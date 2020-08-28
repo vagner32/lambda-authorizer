@@ -1,6 +1,6 @@
 import boto3
 import os
-import parameterstore as p
+import layerutils as p
 
 
 def lambda_handler(event, context):
