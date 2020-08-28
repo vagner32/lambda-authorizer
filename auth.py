@@ -46,6 +46,6 @@ def lambda_handler(event, context):
                     ]
     },
     "context": {
-    "log-message": "Welcome!"
+    "logMessage": "Welcome!"
      }
     }
