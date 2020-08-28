@@ -15,7 +15,7 @@ Resources:
       Handler: auth.lambda_handler
       Runtime: python3.6
       FunctionName: lambda-authorizer
-      CodeUri: s3://serverless-meetup-bucket/lambda-authorizer.zip
+      CodeUri: s3://serverless-meetup-bucket/lambda-authorizer2.zip
       Description: ""
       MemorySize: 1024
       Timeout: 10
