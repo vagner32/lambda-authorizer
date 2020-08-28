@@ -21,7 +21,7 @@ Resources:
       Timeout: 10
       Role: !GetAtt Role.Arn
       Layers:
-        - arn:aws:lambda:sa-east-1:547492879652:layer:layerutils:1
+        - !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:layerutils:1
       Environment:
         Variables:
           PARAMETER_NAME: !Ref ParameterStoreEntryName
