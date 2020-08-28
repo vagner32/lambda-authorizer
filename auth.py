@@ -1,16 +1,19 @@
 import boto3
 import os
+import parameterstore as p
+
 
 def lambda_handler(event, context):
 
 
-    parameterName = os.environ['PARAMETER_NAME']
-    c = boto3.client('ssm')
-    r = c.get_parameter(Name=parameterName)
-    statament = r['Parameter']['Value']
+    statement = p.getParameter(os.environ['PARAMETER_NAME'])
+
+    #c = boto3.client('ssm')
+    #r = c.get_parameter(Name=parameterName)
+    #statament = r['Parameter']['Value']
 
 
-    if statament == "true":
+    if statement == "true":
         return {
         "principalId": "user",
         "policyDocument": {
